@@ -26,7 +26,7 @@ Sitio web corporativo de **Py Building**, empresa paraguaya dedicada al diseño,
 └── README.md           # Documentación
 ```
 
-## Contacto
+## Desarrollador
 
 - **Dirección:** Av. Eusebio Ayala  c/ Adela Speratti
 - **Email:** dmacostaalfonso@gmail.com
