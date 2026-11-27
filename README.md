@@ -2,7 +2,7 @@
 
 Sitio web corporativo de **Py Building**, empresa paraguaya dedicada al diseño, fabricación y montaje de viviendas modulares y estructuras en sistema Steel Frame.
 
-**Sitio web oficial**: [https://pybuilding.com.py](https://://pybuilding.com.py)
+**Sitio web oficial:** [https://www.pybuilding.com.py]
 
 ## Funcionalidades
 
