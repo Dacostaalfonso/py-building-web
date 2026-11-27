@@ -28,6 +28,6 @@ Sitio web corporativo de **Py Building**, empresa paraguaya dedicada al diseño,
 
 ## Contacto
 
-- **Dirección:** Calle Felix Benítez c/ Av. Von Grutter, Limpio, Paraguay
-- **Email:** info@pybuilding.com.py
+- **Dirección:** Av. Eusebio Ayala  c/ Adela Speratti
+- **Email:** dmacostaalfonso@gmail.com
 - **Teléfono / WhatsApp:** +595 993 520 725
