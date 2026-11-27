@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Py Building | Viviendas Modulares Premium</title>
+
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    /*  1. RESET Y CONFIGURACIÓN GLOBAL*/
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      color: #1a1a1a;
+      background-color: #ffffff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    section {
+      padding: 90px 8%;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .section-line {
+      width: 60px;
+      height: 3px;
+      background: #111;
+      margin: 0 auto 50px;
+    }
+
+    /*  2. BOTONES REUTILIZABLES*/
+    .btn-primary {
+      display: inline-block;
+      background: #fff;
+      color: #111;
+      padding: 15px 36px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 4px;
+      transition: 0.3s;
+    }
+
+    .btn-primary:hover {
+      background: #e6e6e6;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      display: inline-block;
+      text-align: center;
+      border: 1.5px solid #111;
+      color: #111;
+      padding: 12px 20px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 4px;
+      transition: 0.3s;
+    }
+
+    .btn-outline:hover {
+      background: #111;
+      color: #fff;
+    }
+
+    .btn-whatsapp {
+      display: inline-block;
+      background: #25D366;
+      color: #fff;
+      padding: 15px 35px;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 4px;
+      transition: 0.3s;
+    }
+
+    .btn-whatsapp:hover {
+      background: #1ebe5d;
+    }
+
+    /*  3. HEADER Y NAVEGACIÓN (ESCRITORIO / MÓVIL)*/
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      background: rgba(255, 255, 255, 0.97);
+      padding: 0 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06);
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #111;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #000;
+      font-weight: 600;
+    }
+
+    .btn-nav {
+      background: #111;
+      color: #fff !important;
+      padding: 10px 22px;
+      border-radius: 4px;
+    }
+
+    .btn-nav:hover {
+      background: #333;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 25px;
+      height: 2px;
+      background: #111;
+      transition: 0.3s;
+    }
+
+    .menu-toggle.activo span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-toggle.activo span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.activo span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.99);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      z-index: 999;
+      padding: 15px 20px 20px;
+    }
+
+    .mobile-menu.abierto {
+      display: block;
+    }
+
+    .mobile-menu a {
+      display: block;
+      text-decoration: none;
+      color: #222;
+      padding: 15px 10px;
+      border-bottom: 1px solid #eee;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .mobile-menu a:active {
+      background: #f5f5f5;
+    }
+
+    .mobile-menu .mobile-whatsapp {
+      margin-top: 15px;
+      background: #25D366;
+      color: #fff;
+      text-align: center;
+      border-radius: 5px;
+      border: none;
+      font-weight: 600;
+    }
+
+    /*  4. SECCIÓN HERO (PORTADA)*/
+    .hero {
+      min-height: 92vh;
+      margin-top: 70px;
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)),
+        url('img/portada.png') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+      padding: 100px 20px 60px;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      font-weight: 300;
+      max-width: 650px;
+      margin-bottom: 35px;
+    }
+
+    /*  5. SECCIÓN QUIÉNES SOMOS*/
+    .about {
+      background: #f9f9f9;
+      text-align: center;
+    }
+
+    .about-text {
+      max-width: 820px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      color: #444;
+    }
+
+    .about-text p {
+      margin-bottom: 18px;
+    }
+
+    .about-text h2 {
+      margin-top: 25px;
+      color: #111;
+    }
+
+    /*  6. CATÁLOGO DE MODELOS Y GALERÍAS*/
+    .modelo-seccion {
+      padding: 80px 8%;
+      border-bottom: 1px solid #eee;
+    }
+
+    .modelo-seccion.gris {
+      background: #f9f9f9;
+    }
+
+    .modelo-contenedor {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .modelo-contenedor.invertido {
+      flex-wrap: wrap-reverse;
+    }
+
+    .modelo-info {
+      flex: 1 1 400px;
+    }
+
+    .modelo-etiqueta {
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      color: #777;
+      text-transform: uppercase;
+    }
+
+    .modelo-info h2 {
+      font-size: 2.5rem;
+      margin: 10px 0;
+      line-height: 1.2;
+    }
+
+    .modelo-info p {
+      color: #555;
+      margin-bottom: 25px;
+      font-size: 0.95rem;
+    }
+
+    .galeria-modelo {
+      flex: 1 1 450px;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .foto-principal {
+      width: 100%;
+      height: 340px;
+      object-fit: contain;
+      background: #f2f2f2;
+      border-radius: 8px;
+      cursor: zoom-in;
+      padding: 8px;
+      transition: transform 0.2s;
+    }
+
+    .foto-principal:hover {
+      transform: scale(1.01);
+    }
+
+    .miniaturas {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .miniaturas img {
+      width: 33.33%;
+      height: 70px;
+      object-fit: contain;
+      background: #f2f2f2;
+      border-radius: 5px;
+      cursor: pointer;
+      opacity: 0.7;
+      border: 2px solid transparent;
+      padding: 4px;
+      transition: 0.3s;
+    }
+
+    .miniaturas img:hover,
+    .miniaturas img.activa {
+      opacity: 1;
+      border-color: #111;
+    }
+
+    /*  7. BANNER DE CONTACTO Y FOOTER*/
+    .cta-banner {
+      background: #161616;
+      color: #fff;
+      text-align: center;
+      padding: 70px 20px;
+    }
+
+    .cta-banner h2 {
+      font-size: 2rem;
+      margin-bottom: 25px;
+      font-weight: 400;
+    }
+
+    footer {
+      background: #0e0e0e;
+      color: #aaa;
+      padding: 60px 8% 30px;
+      font-size: 0.9rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto 40px;
+    }
+
+    .footer-col h4 {
+      color: #fff;
+      margin-bottom: 15px;
+      font-size: 1.05rem;
+      letter-spacing: 1px;
+    }
+
+    .footer-col p {
+      margin-bottom: 10px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 25px;
+      border-top: 1px solid #222;
+      font-size: 0.85rem;
+    }
+
+    /*  8. MODAL Y BOTÓN FLOTANTE WHATSAPP*/
+    .modal-imagen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-imagen.activo {
+      display: flex;
+    }
+
+    .modal-imagen img {
+      max-width: 90%;
+      max-height: 85vh;
+      border-radius: 6px;
+    }
+
+    .modal-cerrar {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: #fff;
+      font-size: 2.5rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #25D366;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+      z-index: 1500;
+      transition: transform 0.3s;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.05);
+    }
+
+    /*  9. RESPONSIVE (MÓVILES Y TABLETS)*/
+    @media (max-width: 850px) {
+      nav {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+
+      .hero p {
+        font-size: 1.05rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ENCABEZADO Y MENÚ ESCRITORIO -->
+  <header>
+    <a href="#inicio" class="logo">Py Building</a>
+
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#v3">V3</a>
+      <a href="#v5">V5</a>
+      <a href="#e95">E95</a>
+      <a href="#v95">V95</a>
+      <a href="#h90">H90</a>
+      <a href="#contacto" class="btn-nav">Contactar</a>
+    </nav>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- MENÚ MÓVIL -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#inicio">Inicio</a>
+    <a href="#v3">Modelo V3</a>
+    <a href="#v5">Modelo V5</a>
+    <a href="#e95">Modelo E95</a>
+    <a href="#v95">Modelo V95</a>
+    <a href="#h90">Modelo H90</a>
+    <a href="https://wa.me/595993520725" target="_blank" rel="noopener noreferrer" class="mobile-whatsapp">
+      💬 Contactar por WhatsApp
+    </a>
+  </div>
+
+  <!-- PORTADA PRINCIPAL (HERO) -->
+  <section id="inicio" class="hero">
+    <h1>Py Building</h1>
+    <p>Viviendas modulares premium con tecnología de vanguardia</p>
+    <a href="#v3" class="btn-primary">Explorar Modelos</a>
+  </section>
+
+  <!-- SECCIÓN QUIÉNES SOMOS -->
+  <section id="nosotros" class="about">
+    <h2 class="section-title">Quiénes somos</h2>
+    <div class="section-line"></div>
+
+    <div class="about-text">
+      <p>
+        En Py Building transformamos la manera de construir, combinando diseño,
+        tecnología y fabricación de precisión.
+      </p>
+      <p>
+        Somos una empresa paraguaya joven, formada por un equipo comprometido con
+        la innovación y la mejora continua. Desarrollamos y ensamblamos nuestras
+        estructuras con mano de obra paraguaya altamente capacitada, aplicando
+        procesos y estándares de fabricación alineados con las mejores prácticas
+        internacionales.
+      </p>
+      <p>
+        Nuestra planta cuenta con tecnología de última generación, permitiéndonos
+        optimizar cada etapa del proceso y mantener un alto nivel de control
+        sobre nuestros proyectos.
+      </p>
+      <p>
+        Creemos que una vivienda debe ser mucho más que un espacio para habitar.
+        Debe ser funcional, confortable, eficiente y diseñada para el futuro.
+      </p>
+      <h2>Py Building. Construimos el futuro.</h2>
+    </div>
+  </section>
+
+  <!-- MODELO V3 -->
+  <section id="v3" class="modelo-seccion">
+    <div class="modelo-contenedor">
+      <div class="galeria-modelo">
+        <img src="img/v3-1.png" alt="Modelo V3" class="foto-principal" title="Haz clic para ampliar">
+        <div class="miniaturas">
+          <img src="img/v3-1.png" alt="Fachada V3" class="activa">
+          <img src="img/v3-2.png" alt="Plano V3">
+          <img src="img/v3-3.png" alt="Interior V3">
+        </div>
+      </div>
+
+      <div class="modelo-info">
+        <span class="modelo-etiqueta">Modelo Modular</span>
+        <h2>Modelo V3</h2>
+        <p>
+          Arquitectura modular contemporánea diseñada para máxima eficiencia,
+          estética minimalista y rápido montaje en cualquier entorno.
+        </p>
+        <a
+          href="https://wa.me/595993520725?text=Hola,%20quisiera%20cotizar%20el%20Modelo%20V3"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-outline"
+        >
+          Cotizar Modelo V3
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODELO V5 -->
+  <section id="v5" class="modelo-seccion gris">
+    <div class="modelo-contenedor invertido">
+      <div class="modelo-info">
+        <span class="modelo-etiqueta">25 m² · Compacto</span>
+        <h2>Modelo V5</h2>
+        <p>
+          Un espacio compacto, cálido y confortable de 25 m². Ideal para vivienda
+          individual, estudio moderno o proyecto turístico.
+        </p>
+        <a
+          href="https://wa.me/595993520725?text=Hola,%20quisiera%20cotizar%20el%20Modelo%20V5"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-outline"
+        >
+          Cotizar Modelo V5
+        </a>
+      </div>
+
+      <div class="galeria-modelo">
+        <img src="img/v5-1.png" alt="Modelo V5" class="foto-principal" title="Haz clic para ampliar">
+        <div class="miniaturas">
+          <img src="img/v5-1.png" alt="Fachada V5" class="activa">
+          <img src="img/v5-2.png" alt="Plano V5">
+          <img src="img/v5-3.png" alt="Interior V5">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODELO E95 -->
+  <section id="e95" class="modelo-seccion">
+    <div class="modelo-contenedor">
+      <div class="galeria-modelo">
+        <img src="img/e95-1.png" alt="Modelo E95" class="foto-principal" title="Haz clic para ampliar">
+        <div class="miniaturas">
+          <img src="img/e95-1.png" alt="Fachada E95" class="activa">
+          <img src="img/e95-2.png" alt="Plano E95">
+          <img src="img/e95-3.png" alt="Interior E95">
+        </div>
+      </div>
+
+      <div class="modelo-info">
+        <span class="modelo-etiqueta">38 m² · Luminoso</span>
+        <h2>Modelo E95</h2>
+        <p>
+          38 m² de diseño contemporáneo, luminoso y funcional. Pensado para
+          aprovechar al máximo la luz natural y la amplitud interior.
+        </p>
+        <a
+          href="https://wa.me/595993520725?text=Hola,%20quisiera%20cotizar%20el%20Modelo%20E95"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-outline"
+        >
+          Cotizar Modelo E95
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODELO V95 -->
+  <section id="v95" class="modelo-seccion gris">
+    <div class="modelo-contenedor invertido">
+      <div class="modelo-info">
+        <span class="modelo-etiqueta">38 m² · Premium</span>
+        <h2>Modelo V95</h2>
+        <p>
+          38 m² que combinan confort, tecnología y conexión directa con el
+          entorno mediante amplios ventanales y terminaciones de primera.
+        </p>
+        <a
+          href="https://wa.me/595993520725?text=Hola,%20quisiera%20cotizar%20el%20Modelo%20V95"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-outline"
+        >
+          Cotizar Modelo V95
+        </a>
+      </div>
+
+      <div class="galeria-modelo">
+        <img src="img/v95-1.png" alt="Modelo V95" class="foto-principal" title="Haz clic para ampliar">
+        <div class="miniaturas">
+          <img src="img/v95-1.png" alt="Fachada V95" class="activa">
+          <img src="img/v95-2.png" alt="Plano V95">
+          <img src="img/v95-3.png" alt="Interior V95">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODELO H90 -->
+  <section id="h90" class="modelo-seccion">
+    <div class="modelo-contenedor">
+      <div class="galeria-modelo">
+        <img src="img/h90-1.png" alt="Modelo H90" class="foto-principal" title="Haz clic para ampliar">
+        <div class="miniaturas">
+          <img src="img/h90-1.png" alt="Fachada H90" class="activa">
+          <img src="img/h90-2.png" alt="Plano H90">
+          <img src="img/h90-3.png" alt="Interior H90">
+        </div>
+      </div>
+
+      <div class="modelo-info">
+        <span class="modelo-etiqueta">Steel Frame</span>
+        <h2>Modelo H90</h2>
+        <p>
+          Construido íntegramente en sistema Steel Frame, garantizando máxima
+          resistencia estructural, aislación térmica y acústica superior.
+        </p>
+        <a
+          href="https://wa.me/595993520725?text=Hola,%20quisiera%20cotizar%20el%20Modelo%20H90"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-outline"
+        >
+          Cotizar Modelo H90
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANNER DE CONTACTO -->
+  <section id="contacto" class="cta-banner">
+    <h2>¿Querés conocer más sobre nuestros modelos?</h2>
+    <a href="https://wa.me/595993520725" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+      💬 Hablar por WhatsApp
+    </a>
+  </section>
+
+  <!-- PIE DE PÁGINA (FOOTER) -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Py Building</h4>
+        <p>Construimos el futuro de la vivienda modular en Paraguay.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <p>info@pybuilding.com.py</p>
+        <p>+595 993 520 725</p>
+        <p>Calle Felix Benítez c/ Av. Von Grutter, Limpio, Paraguay</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 Py Building. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- MODAL DE VISTA AMPLIADA -->
+  <div class="modal-imagen" id="modalImagen">
+    <button class="modal-cerrar" id="cerrarModal" aria-label="Cerrar vista ampliada">&times;</button>
+    <img src="" alt="Vista ampliada" id="imagenAmpliada">
+  </div>
+
+  <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+  <a href="https://wa.me/595993520725" target="_blank" rel="noopener noreferrer" class="whatsapp-float">
+    💬 WhatsApp
+  </a>
+
+  <!-- SCRIPTS DE INTERACTIVIDAD -->
+  <script>
+    // 1. Menú móvil
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('activo');
+      mobileMenu.classList.toggle('abierto');
+    });
+
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('activo');
+        mobileMenu.classList.remove('abierto');
+      });
+    });
+
+    // 2. Cambio de miniaturas en galerías
+    document.querySelectorAll('.galeria-modelo').forEach((galeria) => {
+      const principal = galeria.querySelector('.foto-principal');
+      const miniaturas = galeria.querySelectorAll('.miniaturas img');
+
+      miniaturas.forEach((miniatura) => {
+        miniatura.addEventListener('click', () => {
+          principal.src = miniatura.src;
+          miniaturas.forEach((m) => m.classList.remove('activa'));
+          miniatura.classList.add('activa');
+        });
+      });
+    });
+
+    // 3. Modal para ampliar imagen
+    const modal = document.getElementById('modalImagen');
+    const imagenAmpliada = document.getElementById('imagenAmpliada');
+    const cerrarModal = document.getElementById('cerrarModal');
+
+    document.querySelectorAll('.foto-principal').forEach((foto) => {
+      foto.addEventListener('click', () => {
+        imagenAmpliada.src = foto.src;
+        modal.classList.add('activo');
+      });
+    });
+
+    cerrarModal.addEventListener('click', () => {
+      modal.classList.remove('activo');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('activo');
+      }
+    });
+  </script>
+
+</body>
+</html>
